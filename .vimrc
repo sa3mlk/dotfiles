@@ -34,3 +34,12 @@ function! StripWhitespace ()
 endfunction
 noremap <leader>ss :call StripWhitespace ()<CR>
 
+" Open URL on current line
+function! Browser ()
+  let line0 = getline (".")
+  let line = matchstr (line0, "http[^ )]*")
+  let line = escape (line, "#?&;|%")
+  exec ':silent !firefox -new-tab ' . "\"" . line . "\""
+endfunction
+map <leader>w :call Browser ()<CR>
+
